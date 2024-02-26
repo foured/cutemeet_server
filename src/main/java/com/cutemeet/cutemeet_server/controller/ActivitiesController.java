@@ -3,7 +3,6 @@ package com.cutemeet.cutemeet_server.controller;
 import com.cutemeet.cutemeet_server.models.Activity;
 import com.cutemeet.cutemeet_server.services.ActivityService;
 import lombok.AllArgsConstructor;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
