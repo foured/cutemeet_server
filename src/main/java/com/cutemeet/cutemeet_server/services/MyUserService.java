@@ -23,7 +23,6 @@ public class MyUserService {
 
     public boolean isPasswordCorrect(String username, String password){
         Optional<MyUser> user = repository.findUserByUserName(username);
-        String encodedPassword = passwordEncoder.encode(password);
         MyUser euser = user.orElse(null);
         if(euser == null) return  false;
         return passwordEncoder.matches(password, euser.getPassword());
