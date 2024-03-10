@@ -13,6 +13,11 @@ public class OperationsController {
     private MyUserService myUserService;
     private EmailService emailService;
 
+    @GetMapping("/ping")
+    public String ping(){
+        return "Server online.";
+    }
+
     @PostMapping("/new_user")
     public String addUser(@RequestBody MyUser user){
         myUserService.addUser(user);
@@ -32,5 +37,20 @@ public class OperationsController {
     @GetMapping("/check_code")
     public boolean checkCode(@RequestParam String email, @RequestParam String code){
         return emailService.checkCode(email, code);
+    }
+
+    @PostMapping("/check_canUserBeCreated")
+    public String canUserBeCreated(@RequestBody MyUser user){
+        return myUserService.canUserBeCreated(user);
+    }
+
+    @GetMapping("/check_checkEmailAndPhoneNumber")
+    public String checkEmailAndPhoneNumber(@RequestParam String email, String phoneNumber){
+        return myUserService.checkEmailAndPhoneNumber(email, phoneNumber);
+    }
+
+    @GetMapping("/check_checkUsername")
+    public String checkUsername(@RequestParam String username){
+        return myUserService.checkUsername(username);
     }
 }

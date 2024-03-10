@@ -16,9 +16,9 @@ public class Activity {
     private Long id;
 
     private String name;
-    private String senderName;
-    private String senderContact;
+    private String username;
     private String date;
     private String location;
+    private String description;
     private String tags;
 }

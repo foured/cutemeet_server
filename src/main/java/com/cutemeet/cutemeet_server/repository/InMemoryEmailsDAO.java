@@ -12,7 +12,7 @@ public class InMemoryEmailsDAO {
     private final List<EmailMessage> verificationMessages = new ArrayList<>();
 
     public void saveVerificationMessage(EmailMessage message){
-        verificationMessages.add(message);
+        verificationMessages.add(0, message);
     }
 
     public boolean checkCode(String email, String code){

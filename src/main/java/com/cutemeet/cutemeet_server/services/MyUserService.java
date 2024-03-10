@@ -27,4 +27,37 @@ public class MyUserService {
         if(euser == null) return  false;
         return passwordEncoder.matches(password, euser.getPassword());
     }
+
+    public String checkEmailAndPhoneNumber(String email, String phoneNumber){
+        Optional<MyUser> phUser = repository.findUserByPhoneNumber(phoneNumber);
+        if(phUser.isPresent()) return "Пользователь с таким номером толефона уже существует.";
+
+        Optional<MyUser> eUser = repository.findUserByEmail(email);
+        if(eUser.isPresent()) return "Пользователь с такой почтой уже существует.";
+
+        return "";
+    }
+
+    public String checkUsername(String username){
+        Optional<MyUser> unUser = repository.findUserByUserName(username);
+        if(unUser.isPresent()) return "Пользователь с таким псевдонимом уже существует.";
+
+        return  "";
+    }
+
+    public String canUserBeCreated(MyUser newUser){
+        String username = newUser.getUserName();
+        Optional<MyUser> unUser = repository.findUserByUserName(username);
+        if(unUser.isPresent()) return "Пользователь с таким username уже существует.";
+
+        String email = newUser.getEmail();
+        Optional<MyUser> eUser = repository.findUserByEmail(email);
+        if(eUser.isPresent()) return "Пользователь с таким email уже существует.";
+
+        String phoneNumber = newUser.getPhoneNumber();
+        Optional<MyUser> phUser = repository.findUserByPhoneNumber(phoneNumber);
+        if(phUser.isPresent()) return "Пользователь с таким phone number уже существует.";
+
+        return "";
+    }
 }

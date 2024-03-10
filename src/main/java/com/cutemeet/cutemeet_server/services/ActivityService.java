@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface ActivityService {
     List<Activity> getAllActivities();
-    Activity saveActivity(Activity activity);
+    Activity saveActivity(Activity activity, String username);
+    List<Activity> findActivitiesByTags(String tagsLine);
 }
