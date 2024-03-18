@@ -28,4 +28,9 @@ public class InMemoryActivityServiceImpl implements ActivityService {
     public List<Activity> findActivitiesByTags(String tagsLine) {
         return null;
     }
+
+    @Override
+    public List<Activity> findActivitiesByUsername(String tagsLine) {
+        return null;
+    }
 }

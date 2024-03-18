@@ -9,4 +9,5 @@ public interface ActivityService {
     List<Activity> getAllActivities();
     Activity saveActivity(Activity activity, String username);
     List<Activity> findActivitiesByTags(String tagsLine);
+    List<Activity> findActivitiesByUsername(String tagsLine);
 }

@@ -34,13 +34,20 @@ public class ActivityServiceImpl implements ActivityService {
         tagsLine = tagsLine.toLowerCase();
         List<String> userTags = List.of(tagsLine.split("\\s*,\\s*"));
 
-
         return repository.findAll()
                 .stream()
                 .filter(activity -> {
-                    List<String> tags = List.of(activity.getTags().split(", "));
+                    List<String> tags = List.of(activity.getTags().toLowerCase().split(", "));
                     return tags.containsAll(userTags);
                 })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Activity> findActivitiesByUsername(String username) {
+        return repository.findAll()
+                .stream()
+                .filter(activity -> activity.getUsername().equals(username))
                 .collect(Collectors.toList());
     }
 }

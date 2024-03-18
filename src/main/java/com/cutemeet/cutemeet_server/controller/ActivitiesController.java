@@ -22,9 +22,14 @@ public class ActivitiesController {
         return service.getAllActivities();
     }
 
-    @GetMapping("/find_byTag")
+    @GetMapping("/find_byTags")
     public List<Activity> findByTag(@RequestParam String tagsLine){
         return service.findActivitiesByTags(tagsLine);
+    }
+
+    @GetMapping("/find_byUsername")
+    public List<Activity> findByUsername(@RequestParam String username){
+        return service.findActivitiesByUsername(username);
     }
 
     @PostMapping("/save")
