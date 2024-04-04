@@ -24,4 +24,8 @@ public class MyUser {
     private String surname;
 
     private String roles;
+
+    @OneToOne
+    @JoinColumn(name = "account_data")
+    private MyUserAccountData accountData;
 }

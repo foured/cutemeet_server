@@ -33,6 +33,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/activities/**")
                             .authenticated()
+                        .requestMatchers("/account/**")
+                            .authenticated()
                         .requestMatchers("/operations/**")
                             .permitAll())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)

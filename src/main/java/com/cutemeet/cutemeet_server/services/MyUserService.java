@@ -1,18 +1,23 @@
 package com.cutemeet.cutemeet_server.services;
 
 import com.cutemeet.cutemeet_server.models.MyUser;
+import com.cutemeet.cutemeet_server.models.MyUserAccountData;
+import com.cutemeet.cutemeet_server.repository.UserAccountDataRepository;
 import com.cutemeet.cutemeet_server.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class MyUserService {
     private UserRepository repository;
+    private UserAccountDataRepository userAccountDataRepository;
     private PasswordEncoder passwordEncoder;
 
     public void addUser(MyUser user) {
@@ -59,5 +64,45 @@ public class MyUserService {
         if(phUser.isPresent()) return "Пользователь с таким phone number уже существует.";
 
         return "";
+    }
+
+    public String setUserAccountData(String username, MyUserAccountData accountData){
+        Optional<MyUser> oUser = repository.findUserByUserName(username);
+
+        if(oUser.isPresent()){
+            MyUser user = oUser.get();
+            userAccountDataRepository.save(accountData);
+            user.setAccountData(accountData);
+            repository.save(user);
+            return "Saved.";
+        }
+        else{
+            return "No user with username: " + username;
+        }
+    }
+
+    public String getPhoto(String username){
+        Optional<MyUser> oUser = repository.findUserByUserName(username);
+
+        if(oUser.isPresent()){
+            MyUser user = oUser.get();
+            return Base64.getEncoder().encodeToString(user.getAccountData().getPhotoData());
+        }
+        else{
+            return "No user with username: " + username;
+        }
+    }
+
+    public MyUserAccountData getAccountData(String username){
+        Optional<MyUser> oUser = repository.findUserByUserName(username);
+
+        if(oUser.isPresent()){
+            MyUserAccountData uad = oUser.get().getAccountData();
+            uad.setPhotoData(null);
+            return uad;
+        }
+        else{
+            return null;
+        }
     }
 }

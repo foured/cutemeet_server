@@ -1,6 +1,7 @@
 package com.cutemeet.cutemeet_server.controller;
 
 import com.cutemeet.cutemeet_server.models.MyUser;
+import com.cutemeet.cutemeet_server.models.MyUserAccountData;
 import com.cutemeet.cutemeet_server.services.EmailService;
 import com.cutemeet.cutemeet_server.services.MyUserService;
 import lombok.AllArgsConstructor;
@@ -52,5 +53,15 @@ public class OperationsController {
     @GetMapping("/check_checkUsername")
     public String checkUsername(@RequestParam String username){
         return myUserService.checkUsername(username);
+    }
+
+    @GetMapping("/get_userAccountData")
+    public MyUserAccountData getUserAccountData(@RequestParam String username){
+        return myUserService.getAccountData(username);
+    }
+
+    @GetMapping("/get_userPhoto")
+    public String getUserPhoto(@RequestParam String username){
+        return myUserService.getPhoto(username);
     }
 }
