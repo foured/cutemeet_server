@@ -35,6 +35,8 @@ public class SecurityConfig {
                             .authenticated()
                         .requestMatchers("/account/**")
                             .authenticated()
+                        .requestMatchers("/questionnaires/**")
+                            .authenticated()
                         .requestMatchers("/operations/**")
                             .permitAll())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)

@@ -1,5 +1,6 @@
 package com.cutemeet.cutemeet_server.services;
 
+import com.cutemeet.cutemeet_server.models.FullUserAccountData;
 import com.cutemeet.cutemeet_server.models.MyUser;
 import com.cutemeet.cutemeet_server.models.MyUserAccountData;
 import com.cutemeet.cutemeet_server.repository.UserAccountDataRepository;
@@ -104,5 +105,11 @@ public class MyUserService {
         else{
             return null;
         }
+    }
+
+    public FullUserAccountData getFullUserAccountData(String username){
+        Optional<MyUser> ouser = repository.findUserByUserName(username);
+        if(ouser.isEmpty()) return null;
+        return new FullUserAccountData(ouser.get());
     }
 }

@@ -1,5 +1,6 @@
 package com.cutemeet.cutemeet_server.controller;
 
+import com.cutemeet.cutemeet_server.models.FullUserAccountData;
 import com.cutemeet.cutemeet_server.models.MyUserAccountData;
 import com.cutemeet.cutemeet_server.services.MyUserService;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,6 @@ public class MyUserController {
         String[] tags = tagsLine.split("\\s*,\\s*");
         accountData.setTags(String.join(", ", tags));
 
-
         return myUserService.setUserAccountData(authentication.getName(), accountData);
     }
 
@@ -42,5 +42,11 @@ public class MyUserController {
     private MyUserAccountData getAccountData(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return myUserService.getAccountData(authentication.getName());
+    }
+
+    @GetMapping("/get_fullAccountData")
+    private FullUserAccountData getFullAccountData(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return myUserService.getFullUserAccountData(authentication.getName());
     }
 }

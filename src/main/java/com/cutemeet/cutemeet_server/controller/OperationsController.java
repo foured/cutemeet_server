@@ -1,10 +1,13 @@
 package com.cutemeet.cutemeet_server.controller;
 
+import com.cutemeet.cutemeet_server.models.FullUserAccountData;
 import com.cutemeet.cutemeet_server.models.MyUser;
 import com.cutemeet.cutemeet_server.models.MyUserAccountData;
 import com.cutemeet.cutemeet_server.services.EmailService;
 import com.cutemeet.cutemeet_server.services.MyUserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -63,5 +66,10 @@ public class OperationsController {
     @GetMapping("/get_userPhoto")
     public String getUserPhoto(@RequestParam String username){
         return myUserService.getPhoto(username);
+    }
+
+    @GetMapping("/get_fullAccountData")
+    private FullUserAccountData getFullAccountData(@RequestParam String username){
+        return myUserService.getFullUserAccountData(username);
     }
 }
